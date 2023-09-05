@@ -7,6 +7,12 @@ use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
 class Kernel extends ConsoleKernel
 {
+    protected $middlewareGroups = [
+        'web' => [
+            // ... Other middleware
+            \App\Http\Middleware\Verify2FA::class,
+        ],
+    ];
     /**
      * Define the application's command schedule.
      *

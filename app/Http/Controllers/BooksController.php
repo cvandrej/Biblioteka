@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Books;
+use App\Models\Users;
+use App\Models\RentedBooks;
 
 class BooksController extends Controller
 {
@@ -49,6 +51,7 @@ class BooksController extends Controller
     public function show(Books $book, $id)
     {
         $data['book'] = Books::find($id);
+        $data['iznajmeni'] = RentedBooks::where('book_id', $id);
         return view('Book.show', $data);
     }
 

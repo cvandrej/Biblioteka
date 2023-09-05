@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Users;
+use App\Models\Books;
+use App\Models\Rent;
+use App\Models\RentedBooks;
 
 class UserController extends Controller
 {
@@ -14,7 +17,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $data['users'] = users::all();
+        $data['users'] = Users::all();
         return view("User.users", $data);
     }
 
@@ -47,7 +50,11 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        $data['user'] = Users::find($id);
+        $data['books'] = Books::all();
+        $data['rented'] = Rent::all();
+        $data['iznajmeni'] = RentedBooks::where("users_id", $id)->get();
+        return view('User.show', $data);
     }
 
     /**
